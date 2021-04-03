@@ -1,5 +1,6 @@
 package com.nepplus.pizzaorderapp_20210403.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +34,13 @@ class PizzaStoreListFragment : Fragment() {
         mPizzaList.add(Store("도미노피자", "https://pbs.twimg.com/profile_images/1098371010548555776/trCrCTDN_400x400.png", "1577-3082"))
 
         mStoreAdater = StoreAdapter(activity!!, R.layout.store_list_item, mPizzaList)
-
         pizzaListView.adapter = mStoreAdater
+
+        pizzaListView.setOnItemClickListener { parent, view, position, id ->
+
+            val clickedStore = mPizzaList[position]
+
+//            val myIntent = Intent(activity, )
+        }
     }
 }
