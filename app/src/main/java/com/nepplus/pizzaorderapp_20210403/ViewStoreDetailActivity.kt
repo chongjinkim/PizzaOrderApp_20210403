@@ -38,10 +38,7 @@ class ViewStoreDetailActivity : BaseActivity() {
 
 //        여기 수정해야함
        TedPermission.with(mContext){
-           .setPermissionListener
-           .setDeniedMessage("[설정]에서 전화 권한을 허용해주세요")
-           .setPermissions()
-           .check()
+
        }
     }
 
