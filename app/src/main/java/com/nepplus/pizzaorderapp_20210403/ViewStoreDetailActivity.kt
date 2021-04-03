@@ -1,5 +1,6 @@
 package com.nepplus.pizzaorderapp_20210403
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -16,44 +17,50 @@ class ViewStoreDetailActivity : BaseActivity() {
 
     lateinit var mStore: Store
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_store_detail)
+        setupEvents()
+        setValues()
     }
+
 
     override fun setupEvents() {
 
-        val p1 = object : PermissionListener{
+    callBtn.setOnClickListener {
+
+        val pl = object : PermissionListener {
             override fun onPermissionGranted() {
-               val myUri = Uri.parse("tel:${mStore.phoneNum}")
-               val myIntent = Intent(Intent.ACTION_CALL, myUri)
-               startActivity(myIntent)
+
+                val myUri = Uri.parse("tel:${mStore.phoneNum}")
+                val myIntent = Intent(Intent.ACTION_CALL, myUri)
+                startActivity(myIntent)
+
             }
 
             override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                Toast.makeText(mContext, "전화 연결 불가", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "전화 연결 불가.", Toast.LENGTH_SHORT).show()
             }
-
         }
 
-//        여기 수정해야함
-       TedPermission.with(mContext){
+        TedPermission.with(mContext)
+            .setPermissionListener(pl)
+            .setDeniedMessage("[설정]에서 전화 권한을 허용해 주세요.")
+            .setPermissions(Manifest.permission.CALL_PHONE)
+            .check()
 
-       }
     }
+
+ }
 
     override fun setValues() {
 
-//        링크 안나옴 - 수정
         mStore = intent.getSerializableExtra("store") as Store
 
         Glide.with(mContext).load(mStore.logoURL).into(logoImg)
         storeNameTxt.text = mStore.name
         phoneNumTxt.text = mStore.phoneNum
-
-
-
     }
-
 
 }

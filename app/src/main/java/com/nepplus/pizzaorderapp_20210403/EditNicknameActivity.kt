@@ -11,24 +11,31 @@ class EditNicknameActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_nickname)
+        setupEvents()
+        setValues()
     }
 
     override fun setupEvents() {
 
-        val inputNick = newNicknameEdt.text.toString()
+        okBtn.setOnClickListener {
 
-        val resultIntent = Intent()
+            val inputNick = newNicknameEdt.text.toString()
 
-        resultIntent.putExtra("nick", inputNick)
+            val resultIntent = Intent()
 
-        setResult(Activity.RESULT_OK, resultIntent)
+            resultIntent.putExtra("nick", inputNick)
 
-        finish()
+            setResult(Activity.RESULT_OK, resultIntent)
+
+            finish()
+
+        }
+
 
     }
 
     override fun setValues() {
-        TODO("Not yet implemented")
+
     }
 
 
