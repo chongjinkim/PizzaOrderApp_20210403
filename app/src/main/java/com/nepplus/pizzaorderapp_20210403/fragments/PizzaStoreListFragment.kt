@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nepplus.pizzaorderapp_20210403.R
+import com.nepplus.pizzaorderapp_20210403.adapters.StoreAdapter
 import com.nepplus.pizzaorderapp_20210403.datas.Store
+import kotlinx.android.synthetic.main.fragment_pizza_store_list.*
 
 class PizzaStoreListFragment : Fragment() {
 
     val mPizzaList = ArrayList<Store>()
+
+    lateinit var mStoreAdater : StoreAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,5 +32,8 @@ class PizzaStoreListFragment : Fragment() {
         mPizzaList.add(Store("미스터피자", "https://post-phinf.pstatic.net/MjAxODEyMDVfMzYg/MDAxNTQzOTYxOTA4NjM3.8gsStnhxz7eEc9zpt5nmSRZmI-Pzpl4NJvHYU-Dlgmcg.7Vpgk0lopJ5GoTav3CUDqmXi2-_67S5AXD0AGbbR6J4g.JPEG/IMG_1641.jpg?type=w1200", "1577-0077"))
         mPizzaList.add(Store("도미노피자", "https://pbs.twimg.com/profile_images/1098371010548555776/trCrCTDN_400x400.png", "1577-3082"))
 
+        mStoreAdater = StoreAdapter(activity!!, R.layout.store_list_item, mPizzaList)
+
+        pizzaListView.adapter = mStoreAdater
     }
 }
